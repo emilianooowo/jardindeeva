@@ -1,7 +1,71 @@
 .page {
   flex: 1;
   width: 100%;
-  padding: clamp(2rem, 6vw, 5rem) 1.25rem;
+  padding: 2rem 0;
+}
+
+.recommendations {
+  width: min(100%, 75rem);
+  margin: 1rem auto;
+}
+
+.recommendationsHeading {
+  margin-bottom: 1.25rem;
+}
+
+.recommendationsHeading .category {
+  margin-bottom: 0.25rem;
+}
+
+.recommendationsHeading h2 {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.carousel {
+  display: grid;
+  grid-auto-columns: minmax(13rem, 1fr);
+  grid-auto-flow: column;
+  padding: 0.25rem 0 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  list-style: none;
+}
+
+.relatedCard {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.relatedLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.relatedImageFrame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.relatedImage {
+  object-fit: contain;
+  transition: opacity 180ms ease;
+}
+
+.relatedLink:hover .relatedImage,
+.relatedLink:focus-visible .relatedImage {
+  opacity: 0.6;
+}
+
+.relatedName {
+  display: block;
+  padding-top: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  text-align: center;
 }
 
 .detail {
@@ -13,17 +77,13 @@
   margin-inline: auto;
 }
 
-.imagePanel {
-  position: relative;
-  min-height: min(68vh, 42rem);
-  overflow: hidden;
-  border-radius: 1.5rem;
+.imageColumn {
   animation: imageAppear 600ms ease both;
 }
 
-.image {
-  object-fit: contain;
-  padding: clamp(1rem, 3vw, 2.5rem);
+.imagePanel {
+  position: relative;
+  min-height: min(68vh, 42rem);
 }
 
 .content {
@@ -33,11 +93,11 @@
 
 .backLink {
   display: inline-block;
-  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 0.75rem;
   color: var(--color-morado);
   font-size: var(--text-sm);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.25em;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .category {
@@ -87,6 +147,7 @@
 
 .whatsappButton {
   display: inline-flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
@@ -104,31 +165,36 @@
 .whatsappButton svg {
   width: 1.4rem;
   height: 1.4rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.6;
-}
-
-.whatsappButton svg path + path {
   fill: currentColor;
-  stroke: none;
 }
 
 @keyframes imageAppear {
-  from { opacity: 0; transform: translateX(-1rem); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes textAppear {
-  from { opacity: 0; transform: translateY(0.75rem); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 760px) {
   .page {
-    padding-inline: 1rem;
+    padding: 0 1rem 4rem 1rem;
   }
 
   .detail {
@@ -137,20 +203,22 @@
   }
 
   .imagePanel {
-    min-height: min(70vw, 30rem);
+    min-height: min(120vw, 30rem);
+  }
+
+  .recommendations {
+    margin: 3rem auto;
   }
 
   .content {
     max-width: none;
   }
 
-  .backLink {
-    margin-bottom: 1.5rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .imagePanel,
+
+  .imageColumn,
   .content {
     animation: none;
   }

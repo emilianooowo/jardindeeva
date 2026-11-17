@@ -56,7 +56,7 @@ export default function RamosYArreglosPage() {
                 />
                 </div>
                 <span className={styles.overlay} aria-hidden="true">
-                  Ver Arreglo
+                  {arreglo.categorias.includes("Arreglos") ? "Ver arreglo" : "Ver ramo"}
                 </span>
               </Link>
               {arreglo.galeria.length > 1 && (
