@@ -1,0 +1,171 @@
+.footer {
+  --ground-height: clamp(100px, 15vw, 190px);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: auto;
+  padding: 10rem 0;
+  background: linear-gradient(180deg, #fff 0, #bce8f7 200px);
+  color: var(--color-morado);
+}
+
+.clouds {
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 150px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.firstCloud,
+.secondCloud,
+.thirdCloud {
+  position: absolute;
+  width: clamp(200px, 20vw, 250px);
+  height: auto;
+}
+
+.firstCloud {
+  top: -30px;
+  left: 5%;
+}
+
+.secondCloud {
+  top: -12px;
+  left: 43%;
+}
+
+.thirdCloud {
+  top: -45px;
+  right: 5%;
+}
+
+.landscape {
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 0;
+  height: clamp(180px, 25vw, 320px);
+  pointer-events: none;
+}
+
+.grass {
+  top: auto !important;
+  height: var(--ground-height) !important;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.flowers {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(52px, 6vw, 78px);
+  background-image: url("/svg/flores.svg");
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  background-size: auto 100%;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: clamp(24px, 5vw, 72px);
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.brand,
+.group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 112px;
+  height: 108px;
+  object-fit: contain;
+}
+
+.brand p {
+  max-width: 260px;
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.group h2 {
+  margin: 0 0 4px;
+  font-size: var(--text-md);
+}
+
+.group a {
+  font-size: var(--text-sm);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.group a:hover {
+  color: #3f6943;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.socialLink:hover {
+  color: #3f6943;
+}
+
+.copyright {
+  position: relative;
+  z-index: 1;
+  margin: 32px 0 0;
+  text-align: center;
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 8rem 0;
+  }
+
+  .clouds {
+    height: 120px;
+  }
+
+  .firstCloud{
+    left: 0;
+  }
+
+  .secondCloud {
+    display: none;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer a {
+    transition: none;
+  }
+}

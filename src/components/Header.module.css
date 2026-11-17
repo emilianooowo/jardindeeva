@@ -1,0 +1,273 @@
+.announcement {
+  position: relative;
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  overflow: hidden;
+  padding-block: 7px;
+  background: var(--color-morado);
+  color: #fff;
+}
+
+.announcementText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.announcementTrack {
+  display: flex;
+  width: max-content;
+  animation: announcement-scroll 100s linear infinite;
+}
+
+.announcementGroup {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+  white-space: nowrap;
+}
+
+.announcementPhrase {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+}
+
+.announcementBullet {
+  color: var(--color-durazno);
+}
+
+@keyframes announcement-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.header {
+  position: sticky;
+  z-index: 20;
+  top: 0;
+  width: 100%;
+  background: #fff;
+}
+
+.inner {
+  position: relative;
+  margin-inline: auto;
+}
+
+.desktopNavigation {
+  display: grid;
+  padding: 0.5rem 0;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+
+.leftLinks,
+.rightLinks {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 2.6vw, 36px);
+}
+
+.leftLinks {
+  justify-content: flex-end;
+}
+
+.rightLinks {
+  justify-content: flex-start;
+}
+
+.logoLink {
+  display: flex;
+  grid-column: 2;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 128px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.navigationLink {
+  position: relative;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px 14px;
+  color: #514a52;
+  font-size: var(--text-sm);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navigationLink:hover,
+.navigationLink:focus-visible,
+.currentPage {
+  color: var(--color-morado);
+  text-decoration: underline;
+}
+
+.flowerIcon {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  color: var(--color-morado);
+  font-size: 0.9em;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.72);
+  transition:
+    opacity 150ms ease,
+    transform 180ms ease;
+}
+
+.currentPage .flowerIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.currentPage {
+  font-weight: 700;
+}
+
+.menuButton,
+.mobileNavigation {
+  display: none;
+}
+
+.menuIcon {
+  display: flex;
+  width: 18px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menuIcon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease;
+}
+
+.menuIconOpen span:first-child {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.menuIconOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuIconOpen span:last-child {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 850px) {
+  .inner {
+    padding-inline: 20px;
+  }
+
+  .desktopNavigation {
+    min-height: 78px;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .leftLinks,
+  .rightLinks {
+    display: none;
+  }
+
+  .logoLink {
+    width: 110px;
+    height: 76px;
+  }
+
+  .logo {
+    width: 108px;
+  }
+
+  .menuButton {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 20px;
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgb(94 63 102 / 22%);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-morado);
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
+
+  .mobileNavigation {
+    position: absolute;
+    top: 100%;
+    right: 12px;
+    left: 12px;
+    display: none;
+    align-items: stretch;
+    flex-direction: column;
+    background-color: #fff;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 18px 0 18px 18px;
+    box-shadow: 0 16px 36px rgb(43 28 46 / 20%);
+  }
+
+  .mobileNavigation[data-open="true"] {
+    display: flex;
+  }
+
+  .mobileNavigation .navigationLink {
+    justify-content: flex-start;
+    font-size: var(--text-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcementTrack {
+    display: none;
+  }
+
+  .announcementText {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+    padding-inline: 12px;
+    clip-path: none;
+    animation: none;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .flowerIcon,
+  .menuIcon span {
+    transition: none;
+  }
+}
