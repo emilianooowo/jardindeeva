@@ -1,0 +1,157 @@
+.page {
+  flex: 1;
+  width: 100%;
+  padding: clamp(2rem, 6vw, 5rem) 1.25rem;
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  width: min(100%, 75rem);
+  margin-inline: auto;
+}
+
+.imagePanel {
+  position: relative;
+  min-height: min(68vh, 42rem);
+  overflow: hidden;
+  border-radius: 1.5rem;
+  animation: imageAppear 600ms ease both;
+}
+
+.image {
+  object-fit: contain;
+  padding: clamp(1rem, 3vw, 2.5rem);
+}
+
+.content {
+  max-width: 34rem;
+  animation: textAppear 600ms 100ms ease both;
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-morado);
+  font-size: var(--text-sm);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.category {
+  margin-bottom: 0.5rem;
+  color: var(--color-verde);
+  font-size: var(--text-sm);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.content h1 {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.description {
+  margin-top: 1.25rem;
+  font-size: var(--text-base);
+}
+
+.flowers {
+  margin-top: 2rem;
+}
+
+.flowers h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--fuente-base);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.flowers ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flowers li {
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgb(94 63 102 / 18%);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+}
+
+.whatsappButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 3.25rem;
+  margin-top: 2.25rem;
+  padding: 0.75rem 1.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.whatsappButton svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.whatsappButton svg path + path {
+  fill: currentColor;
+  stroke: none;
+}
+
+@keyframes imageAppear {
+  from { opacity: 0; transform: translateX(-1rem); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes textAppear {
+  from { opacity: 0; transform: translateY(0.75rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding-inline: 1rem;
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .imagePanel {
+    min-height: min(70vw, 30rem);
+  }
+
+  .content {
+    max-width: none;
+  }
+
+  .backLink {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imagePanel,
+  .content {
+    animation: none;
+  }
+}

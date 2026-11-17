@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { arreglosData } from "../../../data/arreglos";
 import styles from "./page.module.css";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/ramos/arreglo-1.jpg",
+        url: "/nobg/arreglo-1-nobg.png",
         alt: "Arreglo floral Gala de Jardín",
       },
     ],
@@ -34,48 +35,35 @@ export default function RamosYArreglosPage() {
     <main className={styles.page}>
       <section className={styles.catalog} aria-labelledby="catalog-title">
         <header className={styles.heading}>
-          <p className={styles.eyebrow}>Diseño floral</p>
           <h1 id="catalog-title">Ramos y arreglos</h1>
         </header>
 
         <ul className={styles.grid}>
           {arreglosData.map((arreglo) => (
             <li className={styles.card} key={arreglo.id}>
-              <div className={styles.imageFrame}>
+              <Link
+                className={styles.cardLink}
+                href={`${catalogPath}/${arreglo.slug}`}
+                aria-label={`Ver imagen y detalles de ${arreglo.titulo}`}
+              >
+                <div className={styles.imageFrame}>
                 <Image
                   src={arreglo.fotoPrincipal}
                   alt={`${arreglo.titulo}, diseño floral de Jardín de Eva`}
                   fill
-                  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, (max-width: 1200px) 33vw, 390px"
                   className={styles.image}
                 />
-              </div>
+                </div>
+                <span className={styles.overlay} aria-hidden="true">
+                  Ver Arreglo
+                </span>
+              </Link>
               {arreglo.galeria.length > 1 && (
-                <div
-                  className={styles.additionalImages}
-                  aria-label={`Más fotografías de ${arreglo.titulo}`}
-                >
-                  {arreglo.galeria.slice(1).map((foto) => (
-                    <div className={styles.additionalImage} key={foto}>
-                      <Image
-                        src={foto}
-                        alt={`Vista adicional de ${arreglo.titulo}`}
-                        fill
-                        sizes="(max-width: 600px) 45vw, 15vw"
-                        className={styles.image}
-                      />
-                    </div>
-                  ))}
+                <div className={styles.visuallyHidden}>
+                  Incluye {arreglo.galeria.length} fotografías.
                 </div>
               )}
-              <div className={styles.details}>
-                <p className={styles.category}>{arreglo.categorias.join(" · ")}</p>
-                <h2 className={styles.name}>{arreglo.titulo}</h2>
-                <p className={styles.description}>{arreglo.descripcion}</p>
-                <p className={styles.composition}>
-                  <span>Flores:</span> {arreglo.flores.join(", ")}
-                </p>
-              </div>
             </li>
           ))}
         </ul>

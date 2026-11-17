@@ -1,26 +1,18 @@
 .page {
   flex: 1;
   width: 100%;
-  padding: clamp(3rem, 7vw, 6rem) 1.25rem;
+  padding: 2.5rem 0;
   background: #fff;
 }
 
 .catalog {
-  width: min(100%, 72rem);
+  width: min(100%, 75rem);
   margin-inline: auto;
 }
 
 .heading {
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
   text-align: center;
-}
-
-.eyebrow {
-  margin-bottom: 0.5rem;
-  color: var(--color-verde);
-  font-size: var(--text-sm);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 
 .heading h1 {
@@ -30,92 +22,141 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.25rem, 3vw, 2.5rem);
+  grid-auto-flow: dense;
+  grid-auto-rows: 15rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .card {
+  position: relative;
   min-width: 0;
   overflow: hidden;
-  border-radius: 1.25rem;
-  background: #fff;
-  box-shadow: 0 0.25rem 1.5rem rgb(94 63 102 / 9%);
+  border-radius: 0.75rem;
+  background: #f7f2f5;
+  animation: appear 650ms both;
+  animation-delay: 0ms;
+}
+
+.card:nth-child(2) { animation-delay: 55ms; }
+.card:nth-child(3) { animation-delay: 110ms; }
+.card:nth-child(4) { animation-delay: 165ms; }
+.card:nth-child(5) { animation-delay: 220ms; }
+.card:nth-child(6) { animation-delay: 275ms; }
+.card:nth-child(7) { animation-delay: 330ms; }
+.card:nth-child(8) { animation-delay: 385ms; }
+.card:nth-child(9) { animation-delay: 440ms; }
+.card:nth-child(10) { animation-delay: 495ms; }
+.card:nth-child(11) { animation-delay: 550ms; }
+
+.card:nth-child(1),
+.card:nth-child(6) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.card:nth-child(4),
+.card:nth-child(9) {
+  grid-row: span 2;
+}
+
+.cardLink {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .imageFrame {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  border-radius: 1.25rem;
-  background: #f7f2f5;
+  position: absolute;
+  inset: 0;
 }
 
 .image {
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.35rem;
 }
 
-.additionalImages {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.75rem 0.9rem 0;
-}
-
-.additionalImage {
-  position: relative;
-  width: 5rem;
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 0.65rem;
-  background: #f7f2f5;
-}
-
-.details {
-  padding: 0.9rem 1rem 1.25rem;
-}
-
-.category {
-  margin: 0 0 0.25rem;
-  color: var(--color-verde);
-  font-size: var(--text-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.name {
-  margin: 0;
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgb(36 25 39 / 48%);
+  color: #fff;
   font-size: var(--text-md);
-}
-
-.description {
-  margin: 0.65rem 0 0;
-  font-size: var(--text-sm);
-}
-
-.composition {
-  margin: 0.65rem 0 0;
-  font-size: var(--text-sm);
-}
-
-.composition span {
   font-weight: 700;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.cardLink:hover .overlay,
+.cardLink:focus-visible .overlay {
+  opacity: 1;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {
   .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 13rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
   .page {
     padding-inline: 1rem;
   }
 
   .grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
+    grid-auto-rows: 11rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(6) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  .card:nth-child(4),
+  .card:nth-child(9) {
+    grid-row: span 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+  }
+
+  .overlay {
+    transition: none;
   }
 }
